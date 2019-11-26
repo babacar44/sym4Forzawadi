@@ -1,0 +1,29 @@
+<?php
+
+namespace Symfony\Component\VarExporter\Internal;
+
+return $getExpiry ? PHP_INT_MAX : Hydrator::hydrate(
+    $o = [
+        clone (Registry::$prototypes['Doctrine\\ORM\\Mapping\\ManyToOne'] ?? Registry::p('Doctrine\\ORM\\Mapping\\ManyToOne')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'targetEntity' => [
+                'Author',
+            ],
+            'cascade' => [
+                [
+                    'all',
+                ],
+            ],
+            'fetch' => [
+                'EAGER',
+            ],
+        ],
+    ],
+    [
+        $o[0],
+    ],
+    []
+);
